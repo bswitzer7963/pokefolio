@@ -25,6 +25,7 @@ export const projects = [
     role: 'Research subgroup co-lead',
     tech: ['Vercel, Vercel Blob, Neon Postgres, Google OAuth, Gemini, Python, React'],
     year: '2026–',
+    url: 'https://backtestmatrix.com',
   }),
   project({
     id: 'pig',
