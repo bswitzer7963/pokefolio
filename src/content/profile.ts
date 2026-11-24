@@ -7,7 +7,7 @@ export const site = {
   subhead: 'Social media data mining & measurement · CS at Stony Brook University',
   intro: 'I\'m a Computer Science student at Stony Brook. My biggest project is ECHO, a research data repository built for Syracuse University that gives researchers a single hub for over 1,200 open-access social media datasets. I wrote the Python ingestion pipeline on the Data Lab\'s SLURM Linux cluster and built the frontend visualizations, including word clusters and dynamic network graphs. I\'ve also built a TypeScript roguelite game with a class partner and deployed a full-stack React site for a local market owner. Most of what I know came from breaking something in one of these and then having to explain why. Outside of code, I worked as a direct support professional for individuals with developmental disabilities. That job taught me to read a room, stay patient, and communicate clearly, which turns out to matter just as much on a team. I\'m looking for a Summer 2027 software engineering internship.',
   catchLine: 'Gotcha! You caught my attention!',
-  cv: '/assets/resume.pdf',
+  cv: '/assets/SwitzerPhDCVNov24.pdf',
   repo: 'https://github.com/bswitzer7963/pokefolio',
 };
 

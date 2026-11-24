@@ -21,7 +21,7 @@ export const cv = [
     entry({
       title: 'Full CV (PDF)',
       text: 'Download the complete CV.',
-      link: '/assets/resume.pdf',
+      link: '/assets/SwitzerPhDCVNov24.pdf',
       item: 'My PhD CV',
       icon: 'town-map',
     }),
