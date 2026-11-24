@@ -1,0 +1,47 @@
+/* Full-viewport screen transitions. .cover hides the screen, .reveal un-hides the next one. */
+.transition { position: fixed; inset: 0; z-index: 1000; pointer-events: all; }
+
+.tr-fadeWhite.cover { background: #fff; animation: tr-fade-in .7s ease-in forwards; }
+.tr-fadeWhite.reveal { background: #fff; animation: tr-fade-out .5s ease-out forwards; }
+.tr-fadeBlack.cover { background: #000; animation: tr-fade-in .6s ease-in forwards; }
+.tr-fadeBlack.reveal { background: #000; animation: tr-fade-out .5s ease-out forwards; }
+@keyframes tr-fade-in { from { opacity: 0; } to { opacity: 1; } }
+@keyframes tr-fade-out { from { opacity: 1; } to { opacity: 0; } }
+
+/* Blinds: alternate strips sweep in from left and right */
+.tr-bars { display: flex; flex-direction: column; }
+.tr-bars span { flex: 1; margin: -1px 0; background: #000; transform-origin: left; }
+.tr-bars span:nth-child(even) { transform-origin: right; }
+.tr-bars.cover span { animation: tr-bar-in .5s cubic-bezier(.6, 0, .4, 1) forwards; animation-delay: calc(var(--i) * 30ms); transform: scaleX(0); }
+.tr-bars.reveal span { animation: tr-bar-out .45s cubic-bezier(.6, 0, .4, 1) forwards; animation-delay: calc(var(--i) * 20ms); }
+@keyframes tr-bar-in { to { transform: scaleX(1); } }
+@keyframes tr-bar-out { from { transform: scaleX(1); } to { transform: scaleX(0); } }
+
+/* Iris: a shrinking hole in a black sheet */
+.tr-iris { overflow: hidden; }
+.iris-hole {
+  position: absolute; left: 50%; top: 50%; width: 0; height: 0; border-radius: 50%;
+  box-shadow: 0 0 0 200vmax #000; transform: translate(-50%, -50%);
+}
+.tr-iris.cover .iris-hole { animation: tr-iris-close .8s ease-in forwards; }
+.tr-iris.reveal .iris-hole { animation: tr-iris-open .6s ease-out forwards; }
+@keyframes tr-iris-close { from { width: 250vmax; height: 250vmax; } to { width: 0; height: 0; } }
+@keyframes tr-iris-open { from { width: 0; height: 0; } to { width: 250vmax; height: 250vmax; } }
+
+/* Wild encounter: double black flash, then the screen swallows into black */
+.tr-encounter.cover { animation: tr-encounter 1.3s steps(1) forwards, tr-encounter-end 1.3s forwards; }
+.tr-encounter.reveal { background: #000; animation: tr-fade-out .6s ease-out forwards; }
+@keyframes tr-encounter {
+  0% { background: #000; } 10% { background: transparent; } 20% { background: #000; } 30% { background: transparent; }
+  40% { background: #fff; } 46% { background: transparent; } 55%, 100% { background: transparent; }
+}
+@keyframes tr-encounter-end {
+  0%, 55% { box-shadow: inset 0 0 0 0 #000; }
+  100% { box-shadow: inset 0 0 0 100vmax #000; }
+}
+
+
+/* Mosaic: the pixelate filter itself is applied from Transition.tsx; this just fades to black under it */
+.tr-mosaic { background: #000; }
+.tr-mosaic.cover { animation: tr-fade-in .65s cubic-bezier(.7, 0, 1, .5) forwards; }
+.tr-mosaic.reveal { animation: tr-fade-out .55s cubic-bezier(0, .5, .3, 1) forwards; }

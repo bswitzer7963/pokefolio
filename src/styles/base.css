@@ -1,0 +1,86 @@
+@font-face {
+  font-family: 'B2W2 Text';
+  src: url('/assets/fonts/b2w2-text.woff2') format('woff2');
+  font-display: block;
+}
+
+:root {
+  --gb-font: 'B2W2 Text', var(--px-font);
+  /* B2W2 text shadows: dark text on light boxes, white text on dark boxes */
+  --sh-dark: 1px 0 #a0a0a8, 0 1px #a0a0a8, 1px 1px #a0a0a8;
+  --sh-light: 1px 0 #50505a, 0 1px #50505a, 1px 1px #50505a;
+  --sh-outline: 1px 0 #282830, -1px 0 #282830, 0 1px #282830, 0 -1px #282830, 1px 1px #282830;
+  --px-font: 'Pixelify Sans', ui-monospace, monospace;
+  --ink: #23262e;
+  --paper: #f8f8f2;
+  --rim: #3a3f4b;
+  --blue: #2f6fd6;
+  --red: #d8453f;
+
+  /* Gen V type colours */
+  --t-normal: #a8a878; --t-fire: #f08030; --t-water: #6890f0; --t-grass: #78c850;
+  --t-electric: #e8c020; --t-ice: #98d8d8; --t-fighting: #c03028; --t-poison: #a040a0;
+  --t-ground: #e0c068; --t-flying: #a890f0; --t-psychic: #f85888; --t-bug: #a8b820;
+  --t-rock: #b8a038; --t-ghost: #705898; --t-dragon: #7038f8; --t-dark: #705848; --t-steel: #b8b8d0;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html, body, #root { margin: 0; min-height: 100%; }
+body { font-family: system-ui, -apple-system, 'Segoe UI', sans-serif; color: var(--ink); background: #111318; }
+button { font: inherit; color: inherit; cursor: pointer; }
+img { image-rendering: pixelated; }
+
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
+/* Stage: the game screen fills the window height, controls sit in the side rails */
+.stage-shell {
+  position: relative;
+  height: 100vh; height: 100dvh; display: flex; align-items: center; justify-content: center;
+  background: #0c0d11; overflow: hidden;
+}
+.stage-frame { position: relative; overflow: hidden; flex: none; }
+.stage-rail { position: absolute; top: 12px; display: flex; flex-direction: column; gap: 8px; z-index: 20; }
+.stage-rail.left { left: 10px; }
+.stage-rail.right { right: 10px; }
+.rail-btn {
+  width: 52px; padding: 8px 2px 6px; display: flex; flex-direction: column; align-items: center; gap: 4px;
+  font-family: var(--px-font); font-size: 11px; line-height: 1.1; text-align: center; color: #c8cede; text-decoration: none;
+  background: #ffffff0d; border: 1px solid #ffffff1f; border-radius: 6px;
+}
+.rail-btn span { font-size: 16px; color: #fff; }
+.rail-btn span.off { opacity: .4; text-decoration: line-through; }
+.rail-btn:hover, .rail-btn:focus-visible { background: #ffffff1f; }
+/* no room for rails (portrait phones): the controls sit in a row above the screen */
+.stage-shell:not(.with-rails) { padding-top: 44px; }
+.stage-shell:not(.with-rails) .stage-rail { flex-direction: row; top: 8px; }
+.stage-shell:not(.with-rails) .rail-btn { width: auto; flex-direction: row; padding: 4px 10px; }
+.stage {
+  position: absolute; left: 0; top: 0; width: 256px; height: 192px;
+  transform-origin: 0 0; overflow: hidden;
+  font-family: var(--gb-font); font-size: 16px; line-height: 16px; font-weight: 400;
+  font-synthesis: none; -webkit-font-smoothing: none; font-smooth: never;
+  image-rendering: pixelated; /* inherited, so background and border images stay sharp too */
+  user-select: none;
+}
+.stage button:focus-visible, .stage a:focus-visible { outline: 1px solid #ffd23f; outline-offset: 0; }
+.stage kbd {
+  font-family: var(--px-font); font-size: 5px; line-height: 1; padding: 1px 2px; margin-left: 3px;
+  border-radius: 2px; background: #0004; color: #fff; vertical-align: middle; opacity: .8;
+}
+
+/* Type colours (still used for tinting project pages) */
+.t-normal { --tc: var(--t-normal); } .t-fire { --tc: var(--t-fire); } .t-water { --tc: var(--t-water); }
+.t-grass { --tc: var(--t-grass); } .t-electric { --tc: var(--t-electric); } .t-ice { --tc: var(--t-ice); }
+.t-fighting { --tc: var(--t-fighting); } .t-poison { --tc: var(--t-poison); } .t-ground { --tc: var(--t-ground); }
+.t-flying { --tc: var(--t-flying); } .t-psychic { --tc: var(--t-psychic); } .t-bug { --tc: var(--t-bug); }
+.t-rock { --tc: var(--t-rock); } .t-ghost { --tc: var(--t-ghost); } .t-dragon { --tc: var(--t-dragon); }
+.t-dark { --tc: var(--t-dark); } .t-steel { --tc: var(--t-steel); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 1ms !important; animation-iteration-count: 1 !important; transition-duration: 1ms !important; }
+}
+
+.type-pill { display: inline-block; vertical-align: middle; image-rendering: pixelated; }
